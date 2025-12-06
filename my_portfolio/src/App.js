@@ -174,7 +174,7 @@ function App() {
     phone: "9285500342",
     location: "Gwalior, India",
     github: "https://github.com/vyakhya700-ship-it",
-    linkedin: "https://www.linkedin.com/in/ervyakhya-mishra-a89b14140",
+    linkedin: "https://www.linkedin.com/in/vyakhya-mishra-a89b14140/",
     summary:
       "Node.js Backend Developer with 9+ years of experience building scalable, high-performance systems using Node.js, Express, PostgreSQL, microservices, and AWS. Strong in REST APIs, async programming, authentication, and database optimization.",
   };
