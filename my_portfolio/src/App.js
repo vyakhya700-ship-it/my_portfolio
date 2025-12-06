@@ -442,7 +442,7 @@ function App() {
                     alt="Profile"
                     className="w-full h-full object-cover rounded-3xl"
                     style={{
-                      objectPosition: "center -41%", // Adjust to move face up/down
+                      objectPosition: "center -33%", // Adjust to move face up/down
                       transform: "scale(2.3)", // Zoom in to show only face
                     }}
                   />
