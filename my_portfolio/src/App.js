@@ -740,7 +740,7 @@ function App() {
                     ></div>
                     <p className="text-gray-400 text-lg mb-8">
                       Showcasing key projects demonstrating expertise in backend
-                      development, microservices, and full-stack solutions.
+                      development, microservices.
                     </p>
                   </div>
 
