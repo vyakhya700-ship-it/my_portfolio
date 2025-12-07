@@ -13,6 +13,7 @@ import {
   Send,
   Calendar,
   Palette,
+  Download
 } from "lucide-react";
 import "./App.css";
 
@@ -32,6 +33,7 @@ function App() {
   const mouseRef = useRef({ x: 0, y: 0 });
 
   const themes = {
+    none: { name: 'No Theme', colors: ['#6B7280'], default: '#6B7280' },
     rainbow: {
       name: "Rainbow",
       colors: [
@@ -145,18 +147,26 @@ function App() {
 
       requestAnimationFrame(animate);
     };
-
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    if(theme != 'none')
+    {
+       window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", (handleMouseMove));
     animate();
 
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
+    }
+   
   }, [theme]);
 
   const getGradientColor = () => {
+    if(theme === 'none')
+    {
+      console.log("tee", theme);
+      return themes[theme].default;
+    }
     if (theme === "rainbow") {
       const hue = (scrollProgress * 3.6) % 360;
       return `hsl(${hue}, 70%, 50%)`;
@@ -170,11 +180,13 @@ function App() {
   const profileData = {
     name: "Vyakhya Mishra",
     title: "Backend Developer",
+    experience: "9 Years",
     email: "vyakhya700@gmail.com",
     phone: "9285500342",
     location: "Gwalior, India",
     github: "https://github.com/vyakhya700-ship-it",
     linkedin: "https://www.linkedin.com/in/vyakhya-mishra-a89b14140/",
+    resumeUrl:"Vyakhya_Mishra_Backend_Developer.pdf",
     summary:
       "Node.js Backend Developer with 9+ years of experience building scalable, high-performance systems using Node.js, Express, PostgreSQL, microservices, and AWS. Strong in REST APIs, async programming, authentication, and database optimization.",
   };
@@ -453,11 +465,34 @@ function App() {
                   style={{ backgroundColor: getGradientColor() }}
                 ></div>
               </div>
+         <a 
+  href={profileData.resumeUrl}
+  download="Vyakhya_Mishra_Resume.pdf"
+  className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-semibold transition-all hover:scale-105 hover:shadow-2xl group relative overflow-hidden"
+  style={{ 
+    background: `linear-gradient(135deg, ${getGradientColor()}, ${getGradientColor()}cc)`,
+    boxShadow: `0 8px 32px ${getGradientColor()}40`
+  }}>
+  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+  <Download className="w-6 h-6 text-white relative z-10 group-hover:animate-bounce" strokeWidth={2.5} />
+  <span className="text-white relative z-10 tracking-wide">Download Resume</span>
+</a>
               <h1 className="text-2xl font-bold text-center mb-2">
                 {profileData.name}
               </h1>
               <p className="text-gray-400 text-center">{profileData.title}</p>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm" 
+                 style={{ 
+                   background: `linear-gradient(135deg, ${getGradientColor()}20, ${getGradientColor()}10)`,
+                   border: `1px solid ${getGradientColor()}30`
+                 }}>
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: getGradientColor() }}></div>
+              <span className="text-sm font-semibold" style={{ color: '#ffffff' }}>
+                {profileData.experience}
+              </span>
             </div>
+          </div>
+
 
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-3 p-3 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-all hover:scale-105">
@@ -527,7 +562,7 @@ function App() {
                     activeSection.slice(1)}
                 </div>
                 <ul className="flex items-center gap-2">
-                  {["About", "Resume", "Portfolio", "Contact"].map((item) => (
+                  {["About", "Resume", "Portfolio"].map((item) => (
                     <li key={item}>
                       <button
                         onClick={() => setActiveSection(item.toLowerCase())}
